@@ -1,0 +1,23 @@
+[
+  "READ",
+  { "ST": "n" },
+  { "CONST": 1 },
+  { "ST": "result" },
+  { "LABEL": "loop" },
+  { "LD": "n" },
+  { "CONST": 1 },
+  { "BINOP": ">" },
+  { "JZ": "done" },
+  { "LD": "result" },
+  { "LD": "n" },
+  { "BINOP": "*" },
+  { "ST": "result" },
+  { "LD": "n" },
+  { "CONST": 1 },
+  { "BINOP": "-" },
+  { "ST": "n" },
+  { "JMP": "loop" },
+  { "LABEL": "done" },
+  { "LD": "result" },
+  "WRITE"
+]
