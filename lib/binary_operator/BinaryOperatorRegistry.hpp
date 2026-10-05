@@ -1,47 +1,30 @@
 #pragma once
 
-#include <functional>
 #include <memory>
 #include <string>
 #include <string_view>
 #include <unordered_map>
 
-#include "value/Value.hpp"
-
-class BinaryOperator {
-public:
-    using Function = std::function<Value(const Value&, const Value&)>;
-
-    explicit BinaryOperator(Function function);
-    Value Apply(const Value& lhs, const Value& rhs) const;
-
-private:
-    Function function_;
-};
-
-using BinaryOperatorPtr = std::shared_ptr<const BinaryOperator>;
+#include "binary_operator/IBinaryOperator.hpp"
 
 class BinaryOperatorRegistry {
 public:
     class Builder {
     public:
-        Builder& Add(std::string symbol, BinaryOperator::Function function);
+        Builder& Add(std::string_view symbol, IBinaryOperatorPtr op);
+
         BinaryOperatorRegistry Build();
 
     private:
-        std::unordered_map<std::string, BinaryOperatorPtr> operators_;
+        std::unordered_map<std::string, IBinaryOperatorPtr> operators_;
     };
 
-    BinaryOperatorPtr Get(std::string_view symbol) const;
+    IBinaryOperatorPtr Get(std::string_view symbol) const;
 
 private:
-    explicit BinaryOperatorRegistry(
-        std::unordered_map<std::string, BinaryOperatorPtr> operators
-    );
+    explicit BinaryOperatorRegistry(std::unordered_map<std::string, IBinaryOperatorPtr> operators);
 
-    std::unordered_map<std::string, BinaryOperatorPtr> operators_;
+    std::unordered_map<std::string, IBinaryOperatorPtr> operators_;
 };
 
-using BinaryOperatorRegistryPtr = std::shared_ptr<const BinaryOperatorRegistry>;
-
-BinaryOperatorRegistryPtr CreateDefaultBinaryOperators();
+using BinaryOperatorRegistryPtr = std::shared_ptr<BinaryOperatorRegistry>;

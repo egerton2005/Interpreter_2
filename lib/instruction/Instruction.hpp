@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "binary_operator/BinaryOperatorRegistry.hpp"
+#include "binary_operator/IBinaryOperator.hpp"
 #include "value/Value.hpp"
 
 class ReadInstruction;
@@ -85,12 +85,12 @@ private:
 
 class BinaryOperationInstruction final : public IInstruction {
 public:
-    explicit BinaryOperationInstruction(BinaryOperatorPtr op);
-    BinaryOperatorPtr GetOperator() const noexcept;
+    explicit BinaryOperationInstruction(IBinaryOperatorPtr op);
+    IBinaryOperatorPtr GetOperator() const noexcept;
     void Accept(IInstructionVisitor& visitor) const override;
 
 private:
-    BinaryOperatorPtr operator_;
+    IBinaryOperatorPtr operator_;
 };
 
 class LabelInstruction final : public IInstruction {
