@@ -3,6 +3,13 @@
 #include <stdexcept>
 #include <string>
 
+#include "lexer/Position.hpp"
+
+class LogicError final : public std::logic_error {
+public:
+    using std::logic_error::logic_error;
+};
+
 class InterpreterError : public std::runtime_error {
 public:
     using std::runtime_error::runtime_error;
@@ -11,6 +18,13 @@ public:
 class SyntaxError : public InterpreterError {
 public:
     using InterpreterError::InterpreterError;
+};
+
+class ParseError final : public SyntaxError {
+public:
+    ParseError(Position position, const std::string& message)
+    : SyntaxError(position.ToString() + ": " + message)
+    { }
 };
 
 class RuntimeError : public InterpreterError {

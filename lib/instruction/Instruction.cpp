@@ -46,11 +46,11 @@ void ConstantInstruction::Accept(IInstructionVisitor& visitor) const {
     visitor.Visit(*this);
 }
 
-BinaryOperationInstruction::BinaryOperationInstruction(BinaryOperatorPtr op)
+BinaryOperationInstruction::BinaryOperationInstruction(IBinaryOperatorPtr op)
 : operator_(std::move(op))
 { }
 
-BinaryOperatorPtr BinaryOperationInstruction::GetOperator() const noexcept {
+IBinaryOperatorPtr BinaryOperationInstruction::GetOperator() const noexcept {
     return operator_;
 }
 

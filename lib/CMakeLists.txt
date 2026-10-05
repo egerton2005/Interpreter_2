@@ -20,6 +20,25 @@ add_library(interpreter_lib
     runtime/io/StreamOutput.cpp
     runtime/Machine.cpp
     runtime/Interpreter.cpp
+    lexer/Position.cpp
+	lexer/Lexeme.cpp
+	lexer/Cursor.cpp
+	lexer/Lexer.cpp
+	parser/text/Parser.cpp
+	compiler/Compiler.cpp
+	ast/expression/BinOp.cpp
+	ast/expression/Const.cpp
+	ast/expression/Var.cpp
+	ast/statement/Assign.cpp
+	ast/statement/Block.cpp
+	ast/statement/DoWhile.cpp
+	ast/statement/If.cpp
+	ast/statement/Read.cpp
+	ast/statement/Skip.cpp
+	ast/statement/While.cpp
+	ast/statement/Write.cpp
+    parser/text/statement_parser/StatementParserRegistry.cpp
+	parser/text/statement_parser/StatementParsers.cpp
 )
 
 target_include_directories(interpreter_lib PUBLIC ${PROJECT_SOURCE_DIR}/lib)
